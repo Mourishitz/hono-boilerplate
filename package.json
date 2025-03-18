@@ -1,12 +1,19 @@
 {
   "name": "hono-boilerplate",
   "scripts": {
-    "dev": "bun run --hot src/index.ts"
+    "dev": "bun run --hot src/index.ts",
+    "start": "bun run src/index.ts",
+    "migrate": "NODE_ENV=$(grep DATABASE_CONNECTION .env | cut -d '=' -f2) knex migrate:up --knexpath=src/config/database.ts",
+    "build": "bun build src/index.ts --compile --outfile server"
   },
   "dependencies": {
     "@vinejs/vine": "^3.0.1",
     "hono": "^4.7.4",
-    "hono-rate-limiter": "^0.4.2"
+    "hono-rate-limiter": "^0.4.2",
+    "knex": "^3.1.0",
+    "knex-utils": "^6.0.0",
+    "objection": "^3.1.5",
+    "pg": "^8.14.1"
   },
   "devDependencies": {
     "@types/bun": "latest"
