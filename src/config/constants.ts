@@ -1,8 +1,6 @@
 const CACHE_KEY = {
-  PROJECT_NAME: 'ProjectName',
-  LOCALE: 'pt'
-}
+  PROJECT_NAME: "ProjectName",
+  LOCALE: "pt-BR",
+};
 
-export {
-  CACHE_KEY
-}
+export { CACHE_KEY };

@@ -5,7 +5,8 @@ import validationRules from "../lang/validation";
 import { __ } from "../lang";
 
 const ErrorHandler = (err: any, c: Context) => {
-  const localization = c.req.header('x-localization') || 'en';
+  const acceptLanguage = c.req.header("Accept-Language") || "pt-BR";
+  const localization = acceptLanguage.split("-")[0];
 
   // Handle syntax errors
   if (err instanceof SyntaxError) {
@@ -15,14 +16,17 @@ const ErrorHandler = (err: any, c: Context) => {
   // Handle HTTP exceptions
   if (err instanceof HTTPException) {
     // Handle Invalid HTTP headers
-    if (err.status === 400 && err.message.includes('Invalid HTTP header:')) {
-      const headerName = err.message.split(':')[1].trim();
+    if (err.status === 400 && err.message.includes("Invalid HTTP header:")) {
+      const headerName = err.message.split(":")[1].trim();
       return c.json({ message: `Invalid HTTP header: ${headerName}` }, 400);
     }
 
     // Handle Malformed JSON
-    if (err.status === 400 && err.message.includes('Malformed JSON in request body')) {
-      return c.json({ message: 'Malformed JSON in request body' }, 400);
+    if (
+      err.status === 400 &&
+      err.message.includes("Malformed JSON in request body")
+    ) {
+      return c.json({ message: "Malformed JSON in request body" }, 400);
     }
 
     return c.json({ error: err.message }, err.status);
@@ -37,14 +41,14 @@ const ErrorHandler = (err: any, c: Context) => {
       // Get validation error message
       const msgValRule: string = validationRules[rule];
       let params: { [key: string]: any } = {
-        field
-      }
+        field,
+      };
 
       if (meta) {
         params = {
           ...params,
-          ...meta
-        }
+          ...meta,
+        };
       }
 
       const message = __(msgValRule, params, localization);
@@ -52,16 +56,22 @@ const ErrorHandler = (err: any, c: Context) => {
       return {
         field,
         message,
-        rule
-      }
-    })
+        rule,
+      };
+    });
     // Handle validation errors
-    return c.json({ message: __('The given data was invalid', {}, localization), errors: parseErrors }, 422);
+    return c.json(
+      {
+        message: __("The given data was invalid", {}, localization),
+        errors: parseErrors,
+      },
+      422,
+    );
   }
 
-  console.error('Error handler', err)
+  console.error("Error handler", err);
   // Handle other errors
-  return c.json({ error: 'Something went wrong. Please try again later' }, 500);
-}
+  return c.json({ error: "Something went wrong. Please try again later" }, 500);
+};
 
-export default ErrorHandler
+export default ErrorHandler;

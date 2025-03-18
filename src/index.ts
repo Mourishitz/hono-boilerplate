@@ -7,17 +7,21 @@ import RateLimiter from "./config/RateLimiter";
 import ErrorHandler from "./config/ErrorHandler";
 import database from "./config/database";
 import { checkHeartbeat } from "knex-utils";
+import Env from "./config/env";
+import { __ } from "./lang";
+import InitMiddleware from "./app/Middleware/InitMiddleware";
+import ApiRoot from "./routes/api";
 
 const app = new Hono();
 
-app.use(trimTrailingSlash(), cors(), logger());
+app.use(trimTrailingSlash(), cors(), logger(), InitMiddleware());
 app.use(RateLimiter);
 
-app.notFound((c) => c.json({ message: "404 Not found" }, 404));
+app.notFound((c) => c.json({ message: __("404: Resource not found") }, 404));
 
 app.onError(ErrorHandler);
 
-showRoutes(app, { verbose: process.env.NODE_ENV === "development" });
+showRoutes(app, { verbose: Env.NodeEnv === "development" });
 
 app.get("/", async (c) => {
   if (process.env.NODE_ENV === "development") {
@@ -45,7 +49,9 @@ app.get("/", async (c) => {
   c.json({ status: "Running!" });
 });
 
+app.route("/", ApiRoot);
+
 export default {
-  port: process.env.PORT || 3000,
+  port: Env.Port,
   fetch: app.fetch,
 };

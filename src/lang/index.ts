@@ -3,7 +3,11 @@ import messages from "@/src/lang/messages";
 
 const localeContext = new Map<string, string>();
 
-const __ = (key: string, replace: { [key: string]: string } = {}, locale?: string): string => {
+const __ = (
+  key: string,
+  replace: { [key: string]: string } = {},
+  locale?: string,
+): string => {
   const localization: string = locale || getLocale();
   const translation = messages[localization]?.[key] || key;
   if (!translation) {
@@ -16,18 +20,18 @@ const __ = (key: string, replace: { [key: string]: string } = {}, locale?: strin
   }
 
   return translatedText;
-}
+};
 
 const setLocale = (language: string): void => {
   localeContext.set(CACHE_KEY.LOCALE, language);
-}
+};
 
 const getLocale = (): string => {
-  return localeContext.get(CACHE_KEY.LOCALE) || 'en';
-}
+  return localeContext.get(CACHE_KEY.LOCALE) || "pt-BR";
+};
 
 const unsetLocale = (): void => {
   localeContext.delete(CACHE_KEY.LOCALE);
-}
+};
 
 export { __, setLocale, getLocale, unsetLocale };
