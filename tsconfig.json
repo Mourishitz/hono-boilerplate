@@ -6,6 +6,30 @@
     "paths": {
       "@/*": [
         "./*"
+      ],
+      "@Api/*": [
+        "./src/app/Api/*"
+      ],
+      "@Core": [
+        "./src/Core"
+      ],
+      "@Interfaces/*": [
+        "./src/Core/Interfaces/*"
+      ],
+      "@Middleware/*": [
+        "./src/Core/Middleware/*"
+      ],
+      "@Models/*": [
+        "./src/Core/Models/*"
+      ],
+      "@Repositories/*": [
+        "./src/Core/Repositories/*"
+      ],
+      "@Requests/*": [
+        "./src/Core/Requests/*"
+      ],
+      "@Resources/*": [
+        "./src/Core/Resources/*"
       ]
     }
   }

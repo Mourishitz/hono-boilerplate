@@ -2,7 +2,7 @@ import { VineString } from "@vinejs/vine";
 import {
   uniqueRule,
   UniqueOptions,
-} from "@/src/app/Requests/rules/uniqueRule";
+} from "@/src/Core/Requests/rules/uniqueRule";
 
 declare module "@vinejs/vine" {
   interface VineString {

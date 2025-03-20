@@ -1,5 +1,5 @@
-import AuthMiddleware from "@/src/app/Middleware/AuthMidleware";
-import InitMiddleware from "@/src/app/Middleware/InitMiddleware";
+import AuthMiddleware from "@Middleware/AuthMidleware";
+import InitMiddleware from "@Middleware/InitMiddleware";
 import UserRouter from "@/src/app/Api/User/Router";
 import { Hono } from "hono";
 import { timeout } from "hono/timeout";

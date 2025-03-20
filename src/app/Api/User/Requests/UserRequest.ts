@@ -1,7 +1,7 @@
 import vine from "@vinejs/vine";
 import { Context } from "hono";
-import BaseRequest from "@/src/app/Requests/BaseRequest";
-import { uniqueRule } from "@/src/app/Requests/rules/uniqueRule";
+import BaseRequest from "@Requests/BaseRequest";
+import { uniqueRule } from "@Requests/rules/uniqueRule";
 
 interface get {
   name: string;
@@ -25,6 +25,13 @@ export default class UserRequest extends BaseRequest {
         uniqueRule({ table: "users", column: "email" })
       ),
       password: vine.string().minLength(6),
+    }),
+    put: vine.object({
+      name: vine.string().minLength(3).nullable(),
+      email: vine.string().email().use(
+        uniqueRule({ table: "users", column: "email" })
+      ).nullable(),
+      password: vine.string().minLength(6).nullable(),
     }),
   };
 

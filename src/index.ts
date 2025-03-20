@@ -9,7 +9,7 @@ import database from "./config/database";
 import { checkHeartbeat } from "knex-utils";
 import Env from "./config/env";
 import { __ } from "./lang";
-import InitMiddleware from "./app/Middleware/InitMiddleware";
+import InitMiddleware from "@Middleware/InitMiddleware";
 import ApiRoot from "./routes/api";
 
 const app = new Hono();

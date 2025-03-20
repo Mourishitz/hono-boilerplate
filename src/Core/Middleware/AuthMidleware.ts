@@ -10,7 +10,7 @@ import {
   JwtTokenNotBefore,
   JwtTokenSignatureMismatched,
 } from "hono/utils/jwt/types";
-import { __ } from "../../lang";
+import { __ } from "@/src/lang";
 
 interface JwtVerifyInterface extends JWTPayload {
   uid: number;

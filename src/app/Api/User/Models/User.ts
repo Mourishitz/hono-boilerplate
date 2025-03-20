@@ -1,9 +1,7 @@
-import { Model } from "objection";
+import BaseModel from "@Models/BaseModel";
 
-export default class User extends Model {
+export default class User extends BaseModel {
   static tableName = "users";
-
-  static idColumn: string | string[] = "id";
 
   declare id: number;
   declare name: string;
