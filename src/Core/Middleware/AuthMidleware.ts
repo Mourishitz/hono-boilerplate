@@ -13,7 +13,7 @@ import {
 import { __ } from "@/src/lang";
 
 interface JwtVerifyInterface extends JWTPayload {
-  uid: number;
+  id: number;
   email: string;
   role: {
     role_id: number[];

@@ -7,6 +7,9 @@
       "@/*": [
         "./*"
       ],
+      "@Utils/*": [
+        "./src/Core/Utils/*"
+      ],
       "@Api/*": [
         "./src/app/Api/*"
       ],

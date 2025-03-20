@@ -5,13 +5,13 @@
     "start": "bun run src/index.ts",
     "migrate:up": "NODE_ENV=$(grep DATABASE_CONNECTION .env | cut -d '=' -f2) knex migrate:up --knexpath=src/config/database.ts",
     "migrate:down": "NODE_ENV=$(grep DATABASE_CONNECTION .env | cut -d '=' -f2) knex migrate:down --knexpath=src/config/database.ts",
-    "create:migration": "knex migrate:make --migrations-directory=src/migrations -x ts",
+    "create:migration": "knex migrate:make --migrations-directory=src/database/migrations -x ts",
     "seed": "NODE_ENV=$(grep DATABASE_CONNECTION .env | cut -d '=' -f2) knex seed:run --knexpath=src/config/database.ts",
     "build": "bun build src/index.ts --compile --outfile server"
   },
   "dependencies": {
     "@vinejs/vine": "^3.0.1",
-    "hono": "^4.7.4",
+    "hono": "^4.7.5",
     "hono-rate-limiter": "^0.4.2",
     "knex": "^3.1.0",
     "knex-utils": "^6.0.0",

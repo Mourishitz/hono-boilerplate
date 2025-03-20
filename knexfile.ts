@@ -17,11 +17,11 @@ const config: { [key: string]: Knex.Config } = {
     },
     debug: true,
     migrations: {
-      directory: "./src/migrations",
+      directory: "./src/database/migrations",
       tableName: "knex_migrations",
     },
     seeds: {
-      directory: "./src/seeds",
+      directory: "./src/database/seeds",
     },
   },
 };
